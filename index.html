@@ -37,7 +37,7 @@
             <div class="container">
                 <div class="hero-content">
                     <h1>Compassionate psychiatric care for your mental wellness journey</h1>
-                    <p>At Affinity Psychiatric Group, we provide personalized mental health care in a supportive, non-judgmental environment. Your well-being is our priority.</p>
+                    <p>Affinity Psychiatric Group serves our patients by providing comprehensive care with compassion, dignity, and respect.</p>
                     <div class="hero-buttons">
                         <a href="#appointment" class="btn btn-primary">Schedule Appointment</a>
                         <a href="#services" class="btn btn-outline">Our Services</a>
@@ -117,8 +117,6 @@
                         <p class="provider-title">Psychiatric-Mental Health NP</p>
                         <div class="specialties">
                             <span class="specialty-badge">Telepsychiatry</span>
-                            <span class="specialty-badge">Anxiety Disorders</span>
-                            <span class="specialty-badge">Geriatric Psychiatry</span>
                         </div>
                     </div>
                 </div>
@@ -132,7 +130,8 @@
                     <p>Fill out the form below to request an appointment with one of our providers. We'll contact you within 1-2 business days to confirm your appointment.</p>
                 </div>
                 <div class="form-container">
-                    <form id="appointmentForm" class="appointment-form">
+                    <form id="appointmentForm" class="appointment-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="cd766d4b-fdcc-47ad-a447-40fcb4705bd8">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="firstName">First Name <span class="required">*</span></label>
@@ -224,6 +223,8 @@
                                 <label for="hipaaConsent">HIPAA Privacy Notice Consent <span class="required">*</span></label>
                                 <p class="form-description">I acknowledge that I have been informed of Affinity Psychiatric Group's Notice of Privacy Practices, which explains how my medical information will be used and disclosed. I understand that I am entitled to receive a copy of this document.</p>
                             </div>
+                            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                            <input type="hidden" name="redirect" value="https://web3forms.com/success">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-full">Submit Appointment Request</button>
