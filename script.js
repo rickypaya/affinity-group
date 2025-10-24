@@ -3,41 +3,41 @@ document.addEventListener("DOMContentLoaded", function () {
   // Set current year in footer
   document.getElementById("currentYear").textContent = new Date().getFullYear();
 
-  // Mobile menu toggle
-  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
-  const nav = document.querySelector(".nav");
+  // // Mobile menu toggle
+  // const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  // const nav = document.querySelector(".nav");
 
-  if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener("click", function () {
-      nav.classList.toggle("active");
+  // if (mobileMenuBtn) {
+  //   mobileMenuBtn.addEventListener("click", function () {
+  //     nav.classList.toggle("active");
 
-      // Toggle hamburger to X
-      const spans = this.querySelectorAll("span");
-      if (nav.classList.contains("active")) {
-        spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-        spans[1].style.opacity = "0";
-        spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
-      } else {
-        spans[0].style.transform = "none";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "none";
-      }
-    });
-  }
+  //     // Toggle hamburger to X
+  //     const spans = this.querySelectorAll("span");
+  //     if (nav.classList.contains("active")) {
+  //       spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+  //       spans[1].style.opacity = "0";
+  //       spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
+  //     } else {
+  //       spans[0].style.transform = "none";
+  //       spans[1].style.opacity = "1";
+  //       spans[2].style.transform = "none";
+  //     }
+  //   });
+  // }
 
-  // Close mobile menu when clicking on a link
-  const navLinks = document.querySelectorAll(".nav a");
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      if (nav.classList.contains("active")) {
-        nav.classList.remove("active");
-        const spans = mobileMenuBtn.querySelectorAll("span");
-        spans[0].style.transform = "none";
-        spans[1].style.opacity = "1";
-        spans[2].style.transform = "none";
-      }
-    });
-  });
+  // // Close mobile menu when clicking on a link
+  // const navLinks = document.querySelectorAll(".nav a");
+  // navLinks.forEach((link) => {
+  //   link.addEventListener("click", function () {
+  //     if (nav.classList.contains("active")) {
+  //       nav.classList.remove("active");
+  //       const spans = mobileMenuBtn.querySelectorAll("span");
+  //       spans[0].style.transform = "none";
+  //       spans[1].style.opacity = "1";
+  //       spans[2].style.transform = "none";
+  //     }
+  //   });
+  // });
 
   // // Form validation and submission
   // const appointmentForm = document.getElementById('appointmentForm');
