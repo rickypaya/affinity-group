@@ -3,41 +3,81 @@ document.addEventListener("DOMContentLoaded", function () {
   // Set current year in footer
   document.getElementById("currentYear").textContent = new Date().getFullYear();
 
-  // // Mobile menu toggle
-  // const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
-  // const nav = document.querySelector(".nav");
+  // Mobile menu toggle
+  const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+  const nav = document.querySelector(".nav");
 
-  // if (mobileMenuBtn) {
-  //   mobileMenuBtn.addEventListener("click", function () {
-  //     nav.classList.toggle("active");
+  function setMenuOpen(isOpen) {
+    nav.classList.toggle("active", isOpen);
+    mobileMenuBtn.classList.toggle("active", isOpen);
+    mobileMenuBtn.setAttribute("aria-expanded", String(isOpen));
+  }
 
-  //     // Toggle hamburger to X
-  //     const spans = this.querySelectorAll("span");
-  //     if (nav.classList.contains("active")) {
-  //       spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-  //       spans[1].style.opacity = "0";
-  //       spans[2].style.transform = "rotate(-45deg) translate(7px, -6px)";
-  //     } else {
-  //       spans[0].style.transform = "none";
-  //       spans[1].style.opacity = "1";
-  //       spans[2].style.transform = "none";
-  //     }
-  //   });
-  // }
+  if (mobileMenuBtn && nav) {
+    mobileMenuBtn.addEventListener("click", function () {
+      setMenuOpen(!nav.classList.contains("active"));
+    });
 
-  // // Close mobile menu when clicking on a link
-  // const navLinks = document.querySelectorAll(".nav a");
-  // navLinks.forEach((link) => {
-  //   link.addEventListener("click", function () {
-  //     if (nav.classList.contains("active")) {
-  //       nav.classList.remove("active");
-  //       const spans = mobileMenuBtn.querySelectorAll("span");
-  //       spans[0].style.transform = "none";
-  //       spans[1].style.opacity = "1";
-  //       spans[2].style.transform = "none";
-  //     }
-  //   });
-  // });
+    // Close mobile menu when clicking on a link
+    const navLinks = document.querySelectorAll(".nav a");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", function () {
+        setMenuOpen(false);
+      });
+    });
+  }
+
+  // Contact form submission (Web3Forms)
+  const contactForm = document.getElementById("contactForm");
+  const contactFormMessage = document.getElementById("contactFormMessage");
+
+  if (contactForm && contactFormMessage) {
+    contactForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const submitButton = contactForm.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+      contactFormMessage.textContent = "";
+      contactFormMessage.className = "form-message";
+
+      const formData = new FormData(contactForm);
+
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            contactFormMessage.textContent =
+              "Thank you! Your message has been sent. We'll be in touch soon.";
+            contactFormMessage.className = "form-message success";
+            contactForm.reset();
+          } else {
+            contactFormMessage.textContent =
+              data.message ||
+              "Something went wrong. Please try again or call our office directly.";
+            contactFormMessage.className = "form-message error";
+          }
+        })
+        .catch(() => {
+          contactFormMessage.textContent =
+            "Something went wrong. Please try again or call our office directly.";
+          contactFormMessage.className = "form-message error";
+        })
+        .finally(() => {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+          contactFormMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        });
+    });
+  }
 
   // // Form validation and submission
   // const appointmentForm = document.getElementById('appointmentForm');
